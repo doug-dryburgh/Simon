@@ -1,16 +1,33 @@
 $(document).ready(function () {
-    var pattern = [1, 2];
+    var pattern = [1, 2, 1, 1, 2];
     var userPattern = [];
-    var sequence = 2;
+    var sequence = 0;
+    var guess = 0;
+    var playerTurn = false;
     //GENERATE A  RANDOM PATTERN
     for (var i = 0; i < 20; i++) {
         //      pattern.push(Math.floor(Math.random() * 4) + 1);
     }
-    console.log("Full pattern: " + pattern);
-    //PLAY OUT SEQUENCE - make time variable?
+    //SESSION COUNTER
+    function sessionCount() {
+        $("#count").html(sequence);
+    }
+    //START BUTTON
+    var isPlaying = false;
+    $("#start").click(function () {
+        if (!isPlaying) {
+            isPlaying = true;
+            sequence++;
+            play();
+        }
+    });
+    //PLAY OUT SEQUENCE
     function play() {
+        console.log("starting next turn");
+        //sequence++;
+        sessionCount();
         var i = 0;
-        setInterval(function () {
+        var interval = setInterval(function () {
             if (i < sequence) {
                 switch (pattern[i]) {
                 case 1:
@@ -31,63 +48,93 @@ $(document).ready(function () {
                 }
                 i++;
             }
+            else {
+                clearInterval(interval);
+                console.log("starting player turn");
+                playerTurn = true;
+            }
         }, 1500);
-        playerTurn();
     }
     //PLAYER TURN
-    function playerTurn() {
-        if (userPattern.length < 2) {
-            $("#green").click(function () {
-                userPattern.push(1);
+    $(".gameSquare").click(function (event) {
+        if (playerTurn) {
+            var squareClicked = event.target.id;
+            switch (squareClicked) {
+            case "green":
                 greenHighlight();
-                console.log("user pattern: " + userPattern + "user pattern length: " + userPattern.length);
-            });
-            $("#red").click(function () {
-                userPattern.push(2);
+                userPattern.push(1);
+                break;
+            case "red":
                 redHighlight();
-                console.log("user pattern: " + userPattern + "user pattern length: " + userPattern.length);
-            });
+                userPattern.push(2);
+                break;
+            case "yellow":
+                yellowHighlight();
+                userPattern.push(3);
+                break;
+            case "blue":
+                blueHighlight();
+                userPattern.push(4);
+            }
+            guess++;
+            checkMatch();
+        }
+    });
+    //CHECK MATCH
+    function checkMatch() {
+        if (userPattern[guess - 1] !== pattern[guess - 1]) {
+            alert("try again");
+            userPattern = [];
+            guess = 0;
+            play();
+            //NEXT: CHECK IF STRICT MODE IS ON/OFF, IF OFF IT REPLAYS PATTERN, IF ON YOU LOSE
+        }
+        else {
+            if (guess >= sequence) {
+                userPattern = [];
+                sequence++;
+                guess = 0;
+                playerTurn = false;
+                play();
+            }
         }
     }
-    /*    else {
-            alert("Wait your turn!");
-        } */
     //HIGHLIGHTING FUNCTIONS
     //1
     function greenHighlight() {
         $("#green").animate({
             backgroundColor: "rgb(0, 255, 0)"
-        }, 600);
+        }, 400);
         $("#green").animate({
             backgroundColor: "rgb(0, 180, 0)"
-        }, 600);
+        }, 400);
     }
     //2
     function redHighlight() {
         $("#red").animate({
             backgroundColor: "rgb(255, 0, 0)"
-        }, 600);
+        }, 400);
         $("#red").animate({
             backgroundColor: "rgb(180, 0, 0)"
-        }, 600);
+        }, 400);
     }
     //3
     function yellowHighlight() {
         $("#yellow").animate({
             backgroundColor: "rgb(255, 255, 0)"
-        }, 600);
+        }, 400);
         $("#yellow").animate({
             backgroundColor: "rgb(180, 180, 0)"
-        }, 600);
+        }, 400);
     }
     //4
     function blueHighlight() {
         $("#blue").animate({
             backgroundColor: "rgb(0, 0, 255)"
-        }, 600);
+        }, 400);
         $("#blue").animate({
             backgroundColor: "rgb(0, 0, 180)"
-        }, 600);
+        }, 400);
     }
     //TEST STUFF TEMP
     $("#test").click(function () {
