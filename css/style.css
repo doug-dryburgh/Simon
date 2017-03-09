@@ -15,55 +15,61 @@
      justify-content: space-around;
      align-items: center;
      flex-wrap: wrap;
-     padding: 3px;
+     padding: 5px;
      height: 500px;
      width: 500px;
      background-color: rgb(30, 30, 30);
      border-radius: 20px;
-     box-shadow: 5px 5px 50px #333333;
+     box-shadow: 10px 10px 60px rgb(0, 0, 0);
      margin-top: 35px;
      margin-left: auto;
      margin-right: auto;
  }
  
  .gameSquare {
-     height: 240px;
-     width: 240px;
+     height: 230px;
+     width: 230px;
      border-radius: 20px;
      cursor: pointer;
  }
  
  #green {
      background-color: rgb(0, 180, 0);
+     box-shadow: 3px 3px 1px rgb(0, 150, 0);
  }
  
  #red {
      background-color: rgb(180, 0, 0);
+     box-shadow: 3px 3px 1px rgb(150, 0, 0);
  }
  
  #yellow {
      background-color: rgb(180, 180, 0);
+     box-shadow: 3px 3px 1px rgb(150, 150, 0);
  }
  
  #blue {
      background-color: rgb(0, 0, 180);
+     box-shadow: 3px 3px 1px rgb(0, 0, 150);
  }
  
  #controls {
-     positon: absolute;
-     transform: translate(0, -350px);
-     display: flex;
+     position: absolute;
+     /*display: flex;
      justify-content: center;
      align-items: center;
-     flex-wrap: wrap;
-     height: 240px;
-     width: 240px;
+     flex-wrap: wrap; */
+     height: 200px;
+     width: 200px;
      background-color: rgb(30, 30, 30);
      border-radius: 20px;
+          box-shadow: 3px 3px 1px rgb(0, 0, 0);
+
      z-index: 1;
  }
  
  #countContainer {
+     height: 50px;
      width: 50px;
      background-color: black;
  }
@@ -72,6 +78,7 @@
      display: flex;
      height: 65px;
      width: 65px;
+     margin: auto;
      border-radius: 40px;
      background-color: red;
      cursor: pointer;
@@ -81,6 +88,7 @@
      display: flex;
      height: 65px;
      width: 65px;
+     margin: auto;
      border-radius: 40px;
      background-color: yellow;
      cursor: pointer;
@@ -112,6 +120,7 @@
      font-size: 2em;
      font-family: 'Anton', sans-serif;
      text-align: center;
+     text-shadow: 3px 3px 1px black;
  }
  
  h2 {
@@ -126,5 +135,7 @@
      font-size: 1.25em;
      font-family: 'Anton', sans-serif;
      text-align: center;
+          text-shadow: 2px 2px 1px black;
+
      margin: auto;
  }

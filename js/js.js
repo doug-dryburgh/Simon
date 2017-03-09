@@ -180,7 +180,10 @@ $(document).ready(function () {
     }
     //test
     $("#test").click(function () {
-        document.getElementById('greenBeep').play();
+        greenHighlight();
+        redHighlight();
+        yellowHighlight();
+        blueHighlight();
     });
     //HIGHLIGHTING FUNCTIONS
     //1
