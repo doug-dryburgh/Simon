@@ -1,14 +1,19 @@
 $(document).ready(function () {
-    var pattern = [1, 2, 1, 1, 2];
+    var pattern;
     var userPattern = [];
     var sequence = 0;
     var guess = 0;
     var playerTurn = false;
     //GENERATE A  RANDOM PATTERN
-    for (var i = 0; i < 20; i++) {
-        //      pattern.push(Math.floor(Math.random() * 4) + 1);
+    function generate() {
+        pattern = [];
+        for (var i = 0; i < 20; i++) {
+            pattern.push(Math.floor(Math.random() * 4) + 1);
+        }
     }
     //SESSION COUNTER
+    $("#count").html(sequence);
+
     function sessionCount() {
         $("#count").html(sequence);
     }
@@ -16,15 +21,34 @@ $(document).ready(function () {
     var isPlaying = false;
     $("#start").click(function () {
         if (!isPlaying) {
+            generate();
+            console.log(pattern);
             isPlaying = true;
             sequence++;
             play();
+            $("#start > h3").html("Reset");
+        }
+        else {
+            $("#start > h3").html("Start");
+            resetGame();
+            console.log("restarting game");
         }
     });
-    //PLAY OUT SEQUENCE
+    //STRICT BUTTON
+    var strict = false;
+    $("#strict").click(function () {
+            if (!strict) {
+                strict = true;
+                $("#strict").css("box-shadow", "1px 1px 20px blue"); //SWITCH TO ADDCLASS?
+            }
+            else {
+                strict = false;
+                $("#strict").css("box-shadow", "0px 0px 0px");
+            }
+        })
+        //PLAY OUT SEQUENCE
     function play() {
         console.log("starting next turn");
-        //sequence++;
         sessionCount();
         var i = 0;
         var interval = setInterval(function () {
@@ -83,14 +107,33 @@ $(document).ready(function () {
     //CHECK MATCH
     function checkMatch() {
         if (userPattern[guess - 1] !== pattern[guess - 1]) {
-            alert("try again");
-            userPattern = [];
-            guess = 0;
-            play();
-            //NEXT: CHECK IF STRICT MODE IS ON/OFF, IF OFF IT REPLAYS PATTERN, IF ON YOU LOSE
+            if (!strict) {
+                setTimeout(function () {
+                    $("#gameContainer").fadeOut(200);
+                    setTimeout(function () {
+                        $("#tryAgain").fadeIn(200);
+                    }, 200);
+                }, 1000);
+            }
+            else {
+                setTimeout(function () {
+                    $("#gameContainer").fadeOut(200);
+                    setTimeout(function () {
+                        $("#gameOver").fadeIn(200);
+                    }, 200);
+                }, 1000);
+            }
         }
         else {
-            if (guess >= sequence) {
+            if (guess === sequence && sequence === 20) {
+                setTimeout(function () {
+                    $("#gameContainer").fadeOut(200);
+                    setTimeout(function () {
+                        $("#winner").fadeIn(200);
+                    }, 200);
+                }, 1000);
+            }
+            else if (guess >= sequence) {
                 userPattern = [];
                 sequence++;
                 guess = 0;
@@ -99,9 +142,50 @@ $(document).ready(function () {
             }
         }
     }
+    //TRY AGAIN
+    $("#tryAgain > h3").click(function () {
+        $("#tryAgain").fadeOut(200);
+        setTimeout(function () {
+            $("#gameContainer").fadeIn(200);
+        }, 200);
+        userPattern = [];
+        guess = 0;
+        playerTurn = false;
+        play();
+    });
+    //PLAY AGAIN
+    $("#gameOver > h3").click(function () {
+        $("#gameOver").fadeOut(200);
+        setTimeout(function () {
+            $("#gameContainer").fadeIn(200);
+        }, 200);
+        resetGame();
+    });
+    //WINNER
+    $("#winner > h3").click(function () {
+        $("#winner").fadeOut(200);
+        setTimeout(function () {
+            $("#gameContainer").fadeIn(200);
+        }, 200);
+        resetGame();
+    });
+    //GAME RESET
+    function resetGame() {
+        userPattern = [];
+        guess = 0;
+        sequence = 0;
+        $("#count").html(sequence);
+        isPlaying = false;
+        playerTurn = false;
+    }
+    //test
+    $("#test").click(function () {
+        document.getElementById('greenBeep').play();
+    });
     //HIGHLIGHTING FUNCTIONS
     //1
     function greenHighlight() {
+        document.getElementById('greenBeep').play();
         $("#green").animate({
             backgroundColor: "rgb(0, 255, 0)"
         }, 400);
@@ -111,6 +195,7 @@ $(document).ready(function () {
     }
     //2
     function redHighlight() {
+        document.getElementById('redBeep').play();
         $("#red").animate({
             backgroundColor: "rgb(255, 0, 0)"
         }, 400);
@@ -120,6 +205,7 @@ $(document).ready(function () {
     }
     //3
     function yellowHighlight() {
+        document.getElementById('yellowBeep').play();
         $("#yellow").animate({
             backgroundColor: "rgb(255, 255, 0)"
         }, 400);
@@ -129,6 +215,7 @@ $(document).ready(function () {
     }
     //4
     function blueHighlight() {
+        document.getElementById('blueBeep').play();
         $("#blue").animate({
             backgroundColor: "rgb(0, 0, 255)"
         }, 400);
@@ -136,8 +223,4 @@ $(document).ready(function () {
             backgroundColor: "rgb(0, 0, 180)"
         }, 400);
     }
-    //TEST STUFF TEMP
-    $("#test").click(function () {
-        play();
-    });
 });

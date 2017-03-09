@@ -5,29 +5,47 @@
     <meta name="description" content="My FCC project to build a Simon style game.">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!--   <script src="https://use.fontawesome.com/00e02cdbce.js"></script> -->
 </head>
 
 <body>
     <div id="pageContainer" class="container">
-        <!--  <div class="row"> -->
+        <!--Game-->
         <div id="gameContainer">
             <div id="green" class="gameSquare"></div>
             <div id="red" class="gameSquare"></div>
             <div id="yellow" class="gameSquare"></div>
             <div id="blue" class="gameSquare"></div>
+            <!--Controls-->
+            <div id="controls">
+                <h1>Simon Says...</h1>
+                <div id="countContainer">
+                    <h2 id="count"></h2> </div>
+                <div id="start">
+                    <h3>Start</h3></div>
+                <div id="strict">
+                    <h3>Strict</h3></div>
+            </div>
         </div>
-        <div id="controls">
-            <h1>Simon Says...</h1>
-            <div id="countContainer">
-                <h2 id="count"></h2> </div>
-            <div id="start">
-                <h3>Start</h3></div>
-            <div id="strict">
-                <h3>Strict</h3></div>
-        </div>
+        <!--Try again-->
+        <div id="tryAgain">
+            <h1>You didn't do what Simon said!</h1>
+            <h3>Try again!</h3> </div>
+        <!--Game over-->
+        <div id="gameOver">
+            <h1>You didn't do what Simon said!</h1>
+            <h3>Play again?</h3> </div>
+        <!--Winner-->
+        <div id="winner">
+            <h1>Congrats! You are as smart as Simon!</h1>
+            <h3>Play again?</h3> </div>
         <button id="test">test</button>
     </div>
+    <!--Audio files-->
+    <audio id="greenBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
+    <audio id="redBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
+    <audio id="yellowBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
+    <audio id="blueBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
+    
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="js/jqueryColourAnimation.js"></script>
     <script src="js/js.js"></script>
@@ -35,6 +53,6 @@
 
 </html>
 <!-- Credits
-1) Background Image: will be updated........
+1) Background Image: https://static.pexels.com/photos/172289/pexels-photo-172289.jpeg
 2) jQuery colour animation: https://bitstorm.org/jquery/color-animation/
 -->
