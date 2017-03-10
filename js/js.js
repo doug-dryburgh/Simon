@@ -22,7 +22,6 @@ $(document).ready(function () {
     $("#start").click(function () {
         if (!isPlaying) {
             generate();
-            console.log(pattern);
             isPlaying = true;
             sequence++;
             play();
@@ -31,7 +30,6 @@ $(document).ready(function () {
         else {
             $("#start > h3").html("Start");
             resetGame();
-            console.log("restarting game");
         }
     });
     //STRICT BUTTON
@@ -39,16 +37,15 @@ $(document).ready(function () {
     $("#strict").click(function () {
             if (!strict) {
                 strict = true;
-                $("#strict").css("box-shadow", "1px 1px 20px blue"); //SWITCH TO ADDCLASS?
+                $("#strict").css("box-shadow", "1px 1px 20px blue");
             }
             else {
                 strict = false;
                 $("#strict").css("box-shadow", "0px 0px 0px");
             }
-        })
-        //PLAY OUT SEQUENCE
+        });
+        //PLAY OUT SEQUENCE - up to current session value
     function play() {
-        console.log("starting next turn");
         sessionCount();
         var i = 0;
         var interval = setInterval(function () {
@@ -56,25 +53,20 @@ $(document).ready(function () {
                 switch (pattern[i]) {
                 case 1:
                     greenHighlight();
-                    console.log("Highlighting: " + pattern[i]);
                     break;
                 case 2:
                     redHighlight();
-                    console.log("Highlighting: " + pattern[i]);
                     break;
                 case 3:
                     yellowHighlight();
-                    console.log("Highlighting: " + pattern[i]);
                     break;
                 case 4:
                     blueHighlight();
-                    console.log("Highlighting: " + pattern[i]);
                 }
                 i++;
             }
             else {
                 clearInterval(interval);
-                console.log("starting player turn");
                 playerTurn = true;
             }
         }, 1500);
@@ -106,12 +98,14 @@ $(document).ready(function () {
     });
     //CHECK MATCH
     function checkMatch() {
+        //if current guess is wrong either allows try again, or a game restart
         if (userPattern[guess - 1] !== pattern[guess - 1]) {
             if (!strict) {
                 setTimeout(function () {
                     $("#gameContainer").fadeOut(200);
                     setTimeout(function () {
                         $("#tryAgain").fadeIn(200);
+                        $("#tryAgain").css("display", "flex");
                     }, 200);
                 }, 1000);
             }
@@ -120,19 +114,23 @@ $(document).ready(function () {
                     $("#gameContainer").fadeOut(200);
                     setTimeout(function () {
                         $("#gameOver").fadeIn(200);
+                        $("#gameOver").css("display", "flex");
                     }, 200);
                 }, 1000);
             }
         }
         else {
+            //if it is a match and guess 20 then you win!
             if (guess === sequence && sequence === 20) {
                 setTimeout(function () {
                     $("#gameContainer").fadeOut(200);
                     setTimeout(function () {
                         $("#winner").fadeIn(200);
+                        $("#winner").css("display", "flex");
                     }, 200);
                 }, 1000);
             }
+            //if it's a match, but under the sequence value player may enter the next value. Once it equals sequence value the next round begins.
             else if (guess >= sequence) {
                 userPattern = [];
                 sequence++;
@@ -175,16 +173,10 @@ $(document).ready(function () {
         guess = 0;
         sequence = 0;
         $("#count").html(sequence);
+        $("#start > h3").html("Start");
         isPlaying = false;
         playerTurn = false;
     }
-    //test
-    $("#test").click(function () {
-        greenHighlight();
-        redHighlight();
-        yellowHighlight();
-        blueHighlight();
-    });
     //HIGHLIGHTING FUNCTIONS
     //1
     function greenHighlight() {
