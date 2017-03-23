@@ -2,9 +2,11 @@
  body,
  html {
      height: 100%;
+     width: 100%;
  }
  
  #pageContainer {
+     #opacity: 0.2;
      background-image: url(../images/background.jpg);
      min-height: 100%;
      min-width: 100%;
@@ -22,9 +24,7 @@
      background-color: rgb(30, 30, 30);
      border-radius: 20px;
      box-shadow: 10px 10px 10px rgb(0, 0, 0);
-     margin-top: 35px;
-     margin-left: auto;
-     margin-right: auto;
+     margin: 35px auto 0px auto;
  }
  
  .gameSquare {
@@ -70,8 +70,9 @@
  }
  
  #countContainer {
-     display: flex;
-     justify-content: center;
+     #display: flex;
+     #justify-content: center;
+     #align-content: center;
      height: 65px;
      width: 65px;
      border-radius: 40px;
@@ -109,21 +110,52 @@
      justify-content: space-between;
      align-items: center;
      flex-direction: column;
-     height: 125px;
-     width: 500px;
+     #height: 125px;
+     #width: 500px;
      background-color: rgb(30, 30, 30);
      border-radius: 20px;
      box-shadow: 10px 10px 10px rgb(0, 0, 0);
      margin-top: 35px;
-     margin-left: auto;
-     margin-right: auto;
+     padding-bottom: 10px;
+     #margin-left: auto;
+     #margin-right: auto;
  }
  
  #gameOver > h3:hover,
  #tryAgain > h3:hover,
- #winner > h3:hover {
+ #winner > h3:hover,
+ #gotIt:hover {
      color: red;
      cursor: pointer;
+ }
+ 
+ #instructionBtn {
+     width: 120px;
+     color: white;
+     background-color: rgb(30, 30, 30);
+     margin: 30px auto 0px auto;
+     border-radius: 20px;
+     text-align: center;
+     ]
+ }
+ 
+ #instructionBtn:hover {
+     cursor: pointer;
+     background-color: black;
+ }
+ 
+ #instructions {
+     display: none;
+     position: fixed;
+     top: 60px;
+     background-color: rgb(30, 30, 30);
+     border-radius: 20px;
+     color: white;
+     z-index: 3;
+ }
+ 
+ .dim {
+     opacity: 0.2;
  }
  
  h1 {
@@ -148,4 +180,37 @@
      text-align: center;
      text-shadow: 2px 2px 1px black;
      margin: auto;
+ }
+ 
+ @media only screen and (max-width: 550px) {
+     #gameContainer {
+         width: 350px;
+         height: 350px;
+     }
+     .gameSquare {
+         width: 160px;
+         height: 160px;
+     }
+     #controls {
+         width: 150px;
+         height: 150px;
+     }
+     h1 {
+         font-size: 1.5em;
+     }
+     h2 {
+         font-size: 1.5em;
+     }
+     #start,
+     #strict {
+         height: 45px;
+         width: 45px;
+     }
+     #countContainer {
+         height: 45px;
+         width: 45px;
+     }
+     #pageContainer {
+         min-width: 400px;
+     }
  }

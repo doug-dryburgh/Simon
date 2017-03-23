@@ -35,16 +35,16 @@ $(document).ready(function () {
     //STRICT BUTTON
     var strict = false;
     $("#strict").click(function () {
-            if (!strict) {
-                strict = true;
-                $("#strict").css("box-shadow", "1px 1px 20px blue");
-            }
-            else {
-                strict = false;
-                $("#strict").css("box-shadow", "0px 0px 0px");
-            }
-        });
-        //PLAY OUT SEQUENCE - up to current session value
+        if (!strict) {
+            strict = true;
+            $("#strict").css("box-shadow", "1px 1px 20px blue");
+        }
+        else {
+            strict = false;
+            $("#strict").css("box-shadow", "0px 0px 0px");
+        }
+    });
+    //PLAY OUT SEQUENCE - up to current session value
     function play() {
         sessionCount();
         var i = 0;
@@ -183,39 +183,51 @@ $(document).ready(function () {
         document.getElementById('greenBeep').play();
         $("#green").animate({
             backgroundColor: "rgb(0, 255, 0)"
-        }, 400);
+        }, 500);
         $("#green").animate({
             backgroundColor: "rgb(0, 180, 0)"
-        }, 400);
+        }, 500);
     }
     //2
     function redHighlight() {
         document.getElementById('redBeep').play();
         $("#red").animate({
             backgroundColor: "rgb(255, 0, 0)"
-        }, 400);
+        }, 500);
         $("#red").animate({
             backgroundColor: "rgb(180, 0, 0)"
-        }, 400);
+        }, 500);
     }
     //3
     function yellowHighlight() {
         document.getElementById('yellowBeep').play();
         $("#yellow").animate({
             backgroundColor: "rgb(255, 255, 0)"
-        }, 400);
+        }, 500);
         $("#yellow").animate({
             backgroundColor: "rgb(180, 180, 0)"
-        }, 400);
+        }, 500);
     }
     //4
     function blueHighlight() {
         document.getElementById('blueBeep').play();
         $("#blue").animate({
             backgroundColor: "rgb(0, 0, 255)"
-        }, 400);
+        }, 500);
         $("#blue").animate({
             backgroundColor: "rgb(0, 0, 180)"
-        }, 400);
+        }, 500);
     }
+    //INSTRUCTIONS
+    $("#instructionBtn").click(function () {
+        $("#pageContainer").toggleClass("dim", 1000);
+        $("#instructions").show(1000);
+                $("#instructionBtn").hide();
+
+    });
+    $("#gotIt").click(function () {
+        $("#pageContainer").toggleClass("dim", 1000);
+        $("#instructions").hide(1000);
+        $("#instructionBtn").show();
+    });
 });

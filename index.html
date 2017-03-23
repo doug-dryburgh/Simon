@@ -29,17 +29,32 @@
             </div>
         </div>
         <!--Try again-->
-        <div id="tryAgain">
-            <h1>You didn't do what Simon said!</h1>
-            <h3>Try again!</h3> </div>
+        <div class="row">
+            <div id="tryAgain" class="col-xs-8 col-xs-offset-2">
+                <h1>You didn't do what Simon said!</h1>
+                <h3>Try again!</h3> </div>
+        </div>
         <!--Game over-->
-        <div id="gameOver">
-            <h1>You didn't do what Simon said!</h1>
-            <h3>Play again?</h3> </div>
+        <div class="row">
+            <div id="gameOver" class="col-xs-8 col-xs-offset-2">
+                <h1>You didn't do what Simon said!</h1>
+                <h3>Play again?</h3> </div>
+        </div>
         <!--Winner-->
-        <div id="winner">
-            <h1>Congrats! You are as smart as Simon!</h1>
-            <h3>Play again?</h3> </div>
+        <div class="row">
+            <div id="winner" class="col-xs-8 col-xs-offset-2">
+                <h1>Congrats! You are as smart as Simon!</h1>
+                <h3>Play again?</h3> </div>
+        </div>
+        <div id="instructionBtn">
+            <h4>Instructions</h4></div>
+    </div>
+    <!--Instructions-->
+    <div class="row">
+        <div id="instructions" class="col-xs-8 col-xs-offset-2">
+            <h1>How to play:</h1>
+            <p>Welcome to Simon Says! The goal in this game is to copy exactly what Simon does. Watch the blocks closely; the computer will illuminate a sequence. Following you must copy that sequence. If you are successful the sequence will play out again from the beginning with an additional step at the end. Incorrect and the computer will show you the pattern again, (unless strict mode is activated). You win if you get the full sequence of 20 correct!</p>
+            <h1 id="gotIt">Got it!</h1> </div>
     </div>
     <!--Audio files-->
     <audio id="greenBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
@@ -48,6 +63,7 @@
     <audio id="blueBeep" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
     <!--Scripts-->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
     <script src="js/jqueryColourAnimation.js"></script>
     <script src="js/js.js"></script>
 </body>
@@ -56,4 +72,6 @@
 <!-- Credits
 1) Background Image: https://static.pexels.com/photos/370/lights-night-dark-abstract.jpeg
 2) jQuery colour animation: https://bitstorm.org/jquery/color-animation/
+3) Font: https://fonts.google.com/specimen/Anton
+4) jQuery toggle class animation: http://api.jqueryui.com/toggleClass/
 -->
